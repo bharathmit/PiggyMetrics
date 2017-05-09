@@ -1,18 +1,29 @@
 package com.piggymetrics.auth.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
-@Document(collection = "users")
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User implements UserDetails {
 
 	@Id
+	@Column(nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long userId;
+	
+	@Column(nullable = false)
 	private String username;
 
+	@Column(nullable = false)
 	private String password;
 
 	@Override

@@ -1,14 +1,17 @@
 package com.piggymetrics.auth;
 
 import com.piggymetrics.auth.service.security.MongoUserDetailsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -29,6 +32,8 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @EnableResourceServer
 @EnableDiscoveryClient
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@EntityScan(value = { "com.piggymetrics.auth.domain" })
+@EnableJpaRepositories(value = { "com.piggymetrics.auth.repository" })
 public class AuthApplication {
 
 	public static void main(String[] args) {
